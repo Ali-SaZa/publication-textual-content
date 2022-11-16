@@ -1,24 +1,28 @@
 # publication-textual-content
+A simple application for publishing text content.
 
-## Project setup
-```
+## Requirements
+
+node version: ^14.18.0
+
+npm version: ^6.14.15
+
+## Installation Packages
+
+Use the package manager [npm](https://www.npmjs.com/) to install packages.
+
+```bash
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
+## Run Development
+
+```bash
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
+## Build
+
+```bash
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
