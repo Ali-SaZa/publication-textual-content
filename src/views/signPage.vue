@@ -4,8 +4,10 @@
       <v-row justify="center" align="center" class="mt-3">
         <v-col cols="12" class="text-center text-h4"> Sign In </v-col>
         <v-col cols="12" class="text-center"> <v-btn outlined class="text-capitalize" color="indigo" to="/register"> Need an account? </v-btn> </v-col>
-        <v-col cols="12" md="7"> <v-text-field v-model="email" label="E-mail" name="email" :rules="emailRules"></v-text-field></v-col>
-        <v-col cols="12" md="7"> <v-text-field v-model="password" label="Password" name="username" :rules="passwordRules"></v-text-field></v-col>
+        <v-col cols="12" md="7"> <v-text-field v-model="email" label="E-mail" name="email" :rules="emailRules" :disabled="buttonLoading"></v-text-field></v-col>
+        <v-col cols="12" md="7">
+          <v-text-field v-model="password" label="Password" name="username" :rules="passwordRules" :disabled="buttonLoading"></v-text-field
+        ></v-col>
         <v-col cols="12" md="7" class="text-right">
           <v-btn color="green" class="text-capitalize white--text" :disabled="!valid" depressed x-large type="submit" :loading="buttonLoading"> Sign In </v-btn>
         </v-col>
@@ -40,9 +42,6 @@ export default {
       } finally {
         this.buttonLoading = false;
       }
-    },
-    handleError() {
-      this.error = null;
     },
   },
 };
