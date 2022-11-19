@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import signIn from "@/views/signIn";
 
 Vue.use(VueRouter);
 function lazyLoad(view) {
@@ -15,12 +14,22 @@ const routes = [
   {
     name: "signPage",
     path: "/login",
-    component: lazyLoad("signIn"),
+    component: lazyLoad("signPage"),
   },
   {
-    name: "signPage",
+    name: "registerPage",
     path: "/register",
-    component: lazyLoad("registerUser"),
+    component: lazyLoad("registerPage"),
+  },
+  {
+    name: "settingPage",
+    path: "/settings",
+    component: lazyLoad("settingPage"),
+  },
+  {
+    name: "newArticlePage",
+    path: "/editor",
+    component: lazyLoad("newArticlePage"),
   },
   {
     name: "notFound",
