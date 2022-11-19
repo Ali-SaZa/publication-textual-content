@@ -49,6 +49,44 @@ export default {
       image: responseData.user.image,
     });
   },
+  async updateUser(context, payload) {
+    console.log("context updateUser:", context.getters.token);
+    console.log("payload updateUser:", payload);
+
+    const response = await fetch("https://conduit.productionready.io/api/user", {
+      method: "PUT",
+      body: JSON.stringify({
+        user: {
+          bio: payload.bio,
+          email: payload.email,
+          image: payload.image,
+          password: payload.password,
+          username: payload.username,
+        },
+      }),
+      headers: {
+        authorization: "Token " + context.getters.token,
+        "content-type": "application/json",
+      },
+    });
+    console.log("response:", response);
+    const responseData = await response.json();
+    console.log("responseData:", responseData);
+    if (!response.ok) {
+      throw new Error("Update failed.");
+    }
+
+    localStorage.setItem("token", responseData.user.token);
+    localStorage.setItem("username", responseData.user.username);
+    localStorage.setItem("email", responseData.user.email);
+    localStorage.setItem("image", responseData.user.image);
+    context.commit("setUser", {
+      token: responseData.user.token,
+      username: responseData.user.username,
+      email: responseData.user.email,
+      image: responseData.user.image,
+    });
+  },
   tryLogin(context) {
     const token = localStorage.getItem("token");
     const username = localStorage.getItem("username");
