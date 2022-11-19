@@ -14,45 +14,47 @@ export default {
   async auth(context, payload) {
     const mode = payload.mode;
     let url = "https://api.realworld.io/api/users/login";
+    let userData = JSON.stringify({
+      user: {
+        email: payload.email,
+        password: payload.password,
+      },
+    });
 
     if (mode === "signup") {
       url = "https://conduit.productionready.io/api/users";
-    }
-
-    console.log("payload:", payload);
-
-    const response = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
+      userData = JSON.stringify({
         user: {
           email: payload.email,
           password: payload.password,
+          username: payload.username,
         },
-      }),
+      });
+    }
+    const response = await fetch(url, {
+      method: "POST",
+      body: userData,
       headers: {
         "content-type": "application/json",
       },
     });
     const responseData = await response.json();
     if (!response.ok) {
+      let errorMessage = "";
+      if (responseData.errors.email) {
+        errorMessage = "email " + responseData.errors.email[0];
+      }
+      if (responseData.errors.username) {
+        errorMessage += ", username " + responseData.errors.username[0];
+      }
+      if (errorMessage.length) {
+        throw new Error(errorMessage);
+      }
       throw new Error("Authentication failed. Make sure your login information is correct.");
     }
-    localStorage.setItem("token", responseData.user.token);
-    localStorage.setItem("username", responseData.user.username);
-    localStorage.setItem("email", responseData.user.email);
-    localStorage.setItem("image", responseData.user.image);
-
-    context.commit("setUser", {
-      token: responseData.user.token,
-      username: responseData.user.username,
-      email: responseData.user.email,
-      image: responseData.user.image,
-    });
+    return context.dispatch("updateStorage", responseData);
   },
   async updateUser(context, payload) {
-    console.log("context updateUser:", context.getters.token);
-    console.log("payload updateUser:", payload);
-
     const response = await fetch("https://conduit.productionready.io/api/user", {
       method: "PUT",
       body: JSON.stringify({
@@ -75,7 +77,9 @@ export default {
     if (!response.ok) {
       throw new Error("Update failed.");
     }
-
+    return context.dispatch("updateStorage", responseData);
+  },
+  updateStorage(context, responseData) {
     localStorage.setItem("token", responseData.user.token);
     localStorage.setItem("username", responseData.user.username);
     localStorage.setItem("email", responseData.user.email);
