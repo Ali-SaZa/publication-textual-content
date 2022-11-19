@@ -2,20 +2,18 @@
   <v-app>
     <v-main>
       <NavbarComponent />
-      <HelloWorld />
+      <router-view> </router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
 import NavbarComponent from "@/components/NavbarComponent";
 
 export default {
   name: "App",
 
   components: {
-    HelloWorld,
     NavbarComponent,
   },
 
