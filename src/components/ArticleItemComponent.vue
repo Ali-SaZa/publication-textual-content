@@ -25,8 +25,11 @@
     <v-card-text class="pt-0">
       {{ description }}
     </v-card-text>
+    <v-card-text class="pt-0" v-if="readMoreStatus">
+      {{ body }}
+    </v-card-text>
     <v-card-actions class="d-flex justify-space-between align-center pr-3">
-      <v-btn text color="teal accent-4 text-capitalize"> Read More </v-btn>
+      <v-btn text color="teal accent-4 text-capitalize" :to="'article/' + slug" v-if="!readMoreStatus"> Read More </v-btn>
       <div>
         <v-chip color="gray" v-for="(tag, index) in tagList" :key="index" class="ma-1" @click.prevent="clickOnTag(tag)">
           {{ tag }}
@@ -49,6 +52,7 @@ export default {
     favoritesCount: Number,
     tagList: Array,
     slug: String,
+    readMoreStatus: Boolean,
   },
   data: () => ({
     favoritesButtonLoading: false,
