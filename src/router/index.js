@@ -35,6 +35,10 @@ const routes = [
     meta: { needAuthentication: false },
   },
   {
+    path: "/article/:id",
+    component: lazyLoad("articleDetailPage"),
+  },
+  {
     name: "notFound",
     path: "*",
     component: lazyLoad("notFound"),
