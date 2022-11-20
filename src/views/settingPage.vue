@@ -91,11 +91,10 @@ export default {
           username: this.username,
           bio: this.bio,
           email: this.email,
-          password: this.password,
+          password: this.newPassword,
         };
         await this.$store.dispatch("updateUser", user);
         await this.fetchUserData();
-        this.password = "";
       } catch (e) {
         alert(e);
       } finally {
