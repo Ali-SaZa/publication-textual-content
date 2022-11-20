@@ -72,13 +72,11 @@ export default {
             "content-type": "application/json",
           },
         });
-        console.log("response***:", response);
         const responseData = await response.json();
         this.image = responseData.user.image;
         this.username = responseData.user.username;
         this.bio = responseData.user.bio !== null ? responseData.user.bio : "";
         this.email = responseData.user.email;
-        console.log("this.image:", this.image);
       } catch (e) {
         console.log("error:", e);
       } finally {

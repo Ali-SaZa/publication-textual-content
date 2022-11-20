@@ -214,9 +214,6 @@ export default {
         const responseData = await response.json();
         this.userTotalPageNumber = Math.ceil(responseData.articlesCount / 10);
         this.userArticles = responseData.articles;
-        console.log("this.userArticles:", this.userArticles);
-        console.log("this.userTotalPageNumber:", this.userTotalPageNumber);
-        console.log("this.userPageNumber:", this.userPageNumber);
       } catch (e) {
         console.log("error:", e);
       } finally {

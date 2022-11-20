@@ -71,9 +71,7 @@ export default {
         "content-type": "application/json",
       },
     });
-    console.log("response:", response);
     const responseData = await response.json();
-    console.log("responseData:", responseData);
     if (!response.ok) {
       throw new Error("Update failed.");
     }
