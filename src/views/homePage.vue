@@ -47,7 +47,7 @@
               />
             </template>
             <!-- if user is logged in-->
-            <template v-if="isLoggedIn">
+            <template v-if="isLoggedIn && !articlesLoading">
               <v-pagination
                 v-if="tab === 0 && userTotalPageNumber > 0"
                 v-model="userPageNumber"

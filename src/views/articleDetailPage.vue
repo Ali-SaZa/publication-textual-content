@@ -55,11 +55,9 @@ export default {
           method: "GET",
           headers: {
             "content-type": "application/json",
-            authorization: "Token " + this.userToken,
           },
         });
         const responseData = await response.json();
-        console.log("responseData:", responseData.article);
         this.author = responseData.article.author;
         this.createdAt = responseData.article.createdAt;
         this.title = responseData.article.title;
